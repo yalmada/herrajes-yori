@@ -3,7 +3,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Catálogo de productos | Herrajes Yori</title>
 
 <style>
@@ -16,17 +17,19 @@
   --line:#e3e8f1;
 }
 
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
 
 body {
   margin:0;
-  font-family:Inter,'Segoe UI',Arial,sans-serif;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
   background:var(--bg);
   color:var(--ink);
 }
 
 header {
-  background:white;
+  background:#fff;
   border-bottom:1px solid var(--line);
 }
 
@@ -40,24 +43,40 @@ header {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  min-height:100px;
+  min-height:105px;
   gap:20px;
 }
 
-/* LOGO ORIGINAL DE HERRAJES YORI */
+/* LOGO */
 
 .brand {
   display:flex;
   align-items:center;
   text-decoration:none;
+  color:var(--navy);
 }
 
 .brand img {
-  width:165px;
+  display:block;
+  width:190px;
   max-width:100%;
   height:auto;
-  display:block;
+  max-height:85px;
   object-fit:contain;
+}
+
+.brand-fallback {
+  display:none;
+  font-size:20px;
+  font-weight:800;
+}
+
+.brand-fallback small {
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:5px;
+  letter-spacing:.15em;
 }
 
 .nav {
@@ -81,7 +100,7 @@ header {
 }
 
 .hero:after {
-  content:'';
+  content:"";
   position:absolute;
   right:-100px;
   top:-140px;
@@ -318,7 +337,7 @@ header {
 .feature img {
   width:88px;
   height:88px;
-  object-fit:cover;
+  object-fit:contain;
   border-radius:12px;
 }
 
@@ -343,7 +362,7 @@ footer {
   letter-spacing:.06em;
 }
 
-/* RESPONSIVE */
+/* ADAPTACIÓN A CELULARES */
 
 @media(max-width:760px) {
   .grid {
@@ -374,8 +393,12 @@ footer {
     grid-template-columns:1fr;
   }
 
+  .top {
+    min-height:90px;
+  }
+
   .brand img {
-    width:145px;
+    width:165px;
   }
 
   .searchbox button {
@@ -400,20 +423,30 @@ footer {
 
 <body>
 
-<!-- ENCABEZADO CON LOGO ORIGINAL -->
+<!-- ENCABEZADO CON LOGO OFICIAL -->
 
 <header>
   <div class="wrap top">
 
     <a class="brand" href="#inicio">
+
       <img
-        src="logo-yori.png"
+        id="logoEmpresa"
+        src="https://www.herrajesyori.com.ar/logo-yori.svg"
         alt="Herrajes Yori y Cía. S.A."
       >
+
+      <div class="brand-fallback" id="logoAlternativo">
+        HERRAJES YORI
+        <small>Y CÍA. S.A.</small>
+      </div>
+
     </a>
 
     <div class="nav">
-      CATÁLOGO DE PRODUCTOS &nbsp; · &nbsp; DEMOSTRACIÓN
+      CATÁLOGO DE PRODUCTOS
+      &nbsp; · &nbsp;
+      DEMOSTRACIÓN
     </div>
 
   </div>
@@ -482,8 +515,8 @@ footer {
   <aside class="feature">
 
     <img
-      src="imagenes/marca-yori.png"
-      alt="Identidad visual Herrajes Yori"
+      src="https://www.herrajesyori.com.ar/logo-yori.svg"
+      alt="Herrajes Yori"
     >
 
     <div>
@@ -505,17 +538,32 @@ footer {
 
 <script>
 
-/*
-  CATÁLOGO DE PRODUCTOS
+/* LOGO: RUTA DIRECTA Y RUTA ALTERNATIVA */
 
-  Para agregar productos:
-  1. Subí la foto a la carpeta imagenes.
-  2. Agregá un objeto al listado.
-  3. Indicá la ruta en "foto".
-*/
+const logoEmpresa=document.getElementById('logoEmpresa');
+const logoAlternativo=document.getElementById('logoAlternativo');
+
+const rutasLogo=[
+  'https://www.herrajesyori.com.ar/logo-yori.svg',
+  'https://www.herrajesyori.com.ar/_next/image?url=%2Flogo-yori.svg&w=384&q=75'
+];
+
+let indiceLogo=0;
+
+logoEmpresa.addEventListener('error',()=>{
+  indiceLogo++;
+
+  if(indiceLogo<rutasLogo.length){
+    logoEmpresa.src=rutasLogo[indiceLogo];
+  }else{
+    logoEmpresa.style.display='none';
+    logoAlternativo.style.display='block';
+  }
+});
+
+/* PRODUCTOS */
 
 const productos = [
-
   {
     nombre:'Barral Aitana 7/8',
     categoria:'Barrales',
@@ -524,7 +572,6 @@ const productos = [
     foto:'',
     palabras:'barral aitana puerta manijon 7/8'
   },
-
   {
     nombre:'Herraje antipánico',
     categoria:'Seguridad',
@@ -533,7 +580,6 @@ const productos = [
     foto:'',
     palabras:'antipanico emergencia seguridad salida puerta'
   },
-
   {
     nombre:'Estabilizador para aberturas',
     categoria:'Accesorios',
@@ -542,21 +588,20 @@ const productos = [
     foto:'',
     palabras:'estabilizador herrajes aberturas soporte'
   }
-
 ];
 
 const salida=document.getElementById('resultados');
 const entrada=document.getElementById('busqueda');
 const contador=document.getElementById('contador');
 
-function normalizar(s) {
+function normalizar(s){
   return String(s)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g,'')
     .toLowerCase();
 }
 
-function escapar(s) {
+function escapar(s){
   return String(s).replace(/[&<>"']/g,c=>({
     '&':'&amp;',
     '<':'&lt;',
@@ -577,7 +622,7 @@ const icono=`
 </div>
 `;
 
-function render() {
+function render(){
 
   const q=normalizar(entrada.value.trim());
 
