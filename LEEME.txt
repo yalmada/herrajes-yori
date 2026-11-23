@@ -1,0 +1,11 @@
+BUSCADOR DE PRODUCTOS — HERRAJES YORI
+
+1. Abrí index.html con doble clic para ver la demo. No necesita instalación.
+2. Probá escribir: barral, antipánico, estabilizador, seguridad.
+3. Para usar fotos reales: copialas dentro de la carpeta imagenes.
+4. Abrí index.html en Visual Studio Code y buscá 'const productos'.
+5. En cada producto, reemplazá foto:'' por foto:'imagenes/nombre-de-la-foto.jpg'.
+6. Cambiá los nombres, descripciones y códigos por datos reales.
+7. Para publicar: subí toda la carpeta a un repositorio GitHub y activá GitHub Pages desde Settings > Pages > Deploy from a branch > main / (root).
+
+IMPORTANTE: Los 3 nombres son ejemplos de categorías/productos mencionados para la demo. Las descripciones no son fichas técnicas verificadas. Las imágenes aportadas se usan como referencia visual de marca; no son fotos de los productos.
