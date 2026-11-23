@@ -1,6 +1,7 @@
 
 <!doctype html>
 <html lang="es">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,7 @@
 <title>Catálogo de productos | Herrajes Yori</title>
 
 <style>
+
 :root {
   --blue:#2c5091;
   --navy:#152d57;
@@ -29,7 +31,7 @@ body {
 }
 
 header {
-  background:#fff;
+  background:white;
   border-bottom:1px solid var(--line);
 }
 
@@ -47,7 +49,7 @@ header {
   gap:20px;
 }
 
-/* LOGO */
+/* LOGO OFICIAL */
 
 .brand {
   display:flex;
@@ -186,7 +188,7 @@ header {
   background:var(--navy);
 }
 
-/* PRODUCTOS */
+/* CATÁLOGO */
 
 .main {
   padding-top:49px;
@@ -335,7 +337,7 @@ header {
 }
 
 .feature img {
-  width:88px;
+  width:100px;
   height:88px;
   object-fit:contain;
   border-radius:12px;
@@ -362,9 +364,10 @@ footer {
   letter-spacing:.06em;
 }
 
-/* ADAPTACIÓN A CELULARES */
+/* DISEÑO RESPONSIVE */
 
 @media(max-width:760px) {
+
   .grid {
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
@@ -384,6 +387,7 @@ footer {
 }
 
 @media(max-width:540px) {
+
   .wrap {
     padding-left:17px;
     padding-right:17px;
@@ -410,7 +414,7 @@ footer {
   }
 
   .feature img {
-    width:64px;
+    width:75px;
     height:64px;
   }
 
@@ -418,12 +422,13 @@ footer {
     min-height:0;
   }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- ENCABEZADO CON LOGO OFICIAL -->
+<!-- ENCABEZADO CON LOGO ORIGINAL -->
 
 <header>
   <div class="wrap top">
@@ -432,8 +437,9 @@ footer {
 
       <img
         id="logoEmpresa"
-        src="https://www.herrajesyori.com.ar/logo-yori.svg"
+        src="logo-yori.svg"
         alt="Herrajes Yori y Cía. S.A."
+        onerror="this.style.display='none';document.getElementById('logoAlternativo').style.display='block';"
       >
 
       <div class="brand-fallback" id="logoAlternativo">
@@ -455,6 +461,7 @@ footer {
 <!-- PORTADA -->
 
 <section class="hero" id="inicio">
+
   <div class="wrap">
 
     <div class="eyebrow">
@@ -473,11 +480,13 @@ footer {
     </p>
 
   </div>
+
 </section>
 
 <!-- BUSCADOR -->
 
 <div class="wrap searchpanel">
+
   <div class="searchbox">
 
     <input
@@ -493,9 +502,10 @@ footer {
     </button>
 
   </div>
+
 </div>
 
-<!-- CATÁLOGO -->
+<!-- PRODUCTOS -->
 
 <main class="wrap main">
 
@@ -515,17 +525,20 @@ footer {
   <aside class="feature">
 
     <img
-      src="https://www.herrajesyori.com.ar/logo-yori.svg"
+      src="logo-yori.svg"
       alt="Herrajes Yori"
     >
 
     <div>
+
       <h3>Calidad en cada detalle</h3>
+
       <p>
         Una experiencia de búsqueda simple,
         rápida y adaptable a todo el catálogo
         de Herrajes Yori.
       </p>
+
     </div>
 
   </aside>
@@ -538,32 +551,10 @@ footer {
 
 <script>
 
-/* LOGO: RUTA DIRECTA Y RUTA ALTERNATIVA */
-
-const logoEmpresa=document.getElementById('logoEmpresa');
-const logoAlternativo=document.getElementById('logoAlternativo');
-
-const rutasLogo=[
-  'https://www.herrajesyori.com.ar/logo-yori.svg',
-  'https://www.herrajesyori.com.ar/_next/image?url=%2Flogo-yori.svg&w=384&q=75'
-];
-
-let indiceLogo=0;
-
-logoEmpresa.addEventListener('error',()=>{
-  indiceLogo++;
-
-  if(indiceLogo<rutasLogo.length){
-    logoEmpresa.src=rutasLogo[indiceLogo];
-  }else{
-    logoEmpresa.style.display='none';
-    logoAlternativo.style.display='block';
-  }
-});
-
-/* PRODUCTOS */
+/* PRODUCTOS DE DEMOSTRACIÓN */
 
 const productos = [
+
   {
     nombre:'Barral Aitana 7/8',
     categoria:'Barrales',
@@ -572,6 +563,7 @@ const productos = [
     foto:'',
     palabras:'barral aitana puerta manijon 7/8'
   },
+
   {
     nombre:'Herraje antipánico',
     categoria:'Seguridad',
@@ -580,6 +572,7 @@ const productos = [
     foto:'',
     palabras:'antipanico emergencia seguridad salida puerta'
   },
+
   {
     nombre:'Estabilizador para aberturas',
     categoria:'Accesorios',
@@ -588,20 +581,21 @@ const productos = [
     foto:'',
     palabras:'estabilizador herrajes aberturas soporte'
   }
+
 ];
 
 const salida=document.getElementById('resultados');
 const entrada=document.getElementById('busqueda');
 const contador=document.getElementById('contador');
 
-function normalizar(s){
+function normalizar(s) {
   return String(s)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g,'')
     .toLowerCase();
 }
 
-function escapar(s){
+function escapar(s) {
   return String(s).replace(/[&<>"']/g,c=>({
     '&':'&amp;',
     '<':'&lt;',
@@ -613,16 +607,19 @@ function escapar(s){
 
 const icono=`
 <div class="placeholder">
+
   <svg viewBox="0 0 64 64" aria-hidden="true">
     <rect x="9" y="12" width="46" height="40" rx="5"/>
     <circle cx="24" cy="25" r="5"/>
     <path d="m13 46 13-13 9 8 7-7 10 12"/>
   </svg>
+
   <span>AGREGAR FOTO DEL PRODUCTO</span>
+
 </div>
 `;
 
-function render(){
+function render() {
 
   const q=normalizar(entrada.value.trim());
 
@@ -645,6 +642,7 @@ function render(){
       <article class="card">
 
         <div class="photo">
+
           ${p.foto
             ? `<img
                  src="${escapar(p.foto)}"
@@ -653,6 +651,7 @@ function render(){
                >`
             : icono
           }
+
         </div>
 
         <div class="details">
